@@ -1,5 +1,7 @@
-using AIChatApp.Web.Components;
-using Microsoft.Extensions.Configuration.Json;
+using AIChatApp.Components;
+using AIChatApp.Model;
+using AIChatApp.Services;
+using Microsoft.SemanticKernel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,16 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Add the Azure OpenAI client configured in AppHost
+builder.AddAzureOpenAIClient("openai");
+
+// Add Semantic Kernel. This will use the OpenAI client configured in the line above
+var chatDeploymentName = builder.Configuration["AI_ChatDeploymentName"] ?? "chat";
+builder.Services.AddKernel()
+    .AddAzureOpenAIChatCompletion(chatDeploymentName);
+
+builder.Services.AddTransient<ChatService>();
 
 var app = builder.Build();
 
@@ -28,5 +40,14 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
    .AddInteractiveServerRenderMode();
+
+// Configure APIs for chat related features
+// Uncomment for a non-streaming response
+//app.MapPost("/api/chat", (ChatRequest request, ChatHandler chatHandler) => (chatHandler.); 
+//  .WithName("Chat")
+//  .WithOpenApi();
+app.MapPost("/api/chat/stream", (ChatRequest request, ChatService chatHandler) => chatHandler.Stream(request))
+    .WithName("StreamingChat")
+    .WithOpenApi();
 
 app.Run();

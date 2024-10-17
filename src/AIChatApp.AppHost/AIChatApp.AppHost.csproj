@@ -12,11 +12,9 @@
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.1" />
     <PackageReference Include="Aspire.Hosting.Azure.CognitiveServices" Version="8.2.1" />
-    <PackageReference Include="Azure.Identity" Version="1.13.0-beta.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AIChatApp.Backend\AIChatApp.Backend.csproj" />
     <ProjectReference Include="..\AIChatApp.Web\AIChatApp.Web.csproj" />
   </ItemGroup>
 

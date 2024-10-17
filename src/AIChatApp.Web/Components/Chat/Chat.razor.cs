@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using AIChatApp.Model;
-using AIChatApp.Shared;
+using AIChatApp.Services;
 
-namespace AIChatApp.Web.Components.Chat;
+namespace AIChatApp.Components.Chat;
 
 public partial class Chat
 {
     [Inject]
-    internal BackendClient Backend { get; init; }
+    internal ChatService? ChatHandler { get; init; }
     List<Message> messages = new();
     ElementReference writeMessageElement;
     string? userMessageText;
@@ -31,17 +31,16 @@ public partial class Chat
 
     async void SendMessage()
     {
-        if (Backend is null) { return; }
+        if (ChatHandler is null) { return; }
 
         if (!string.IsNullOrWhiteSpace(userMessageText))
         {
             // Add the user's message to the UI
             // TODO: Don't rely on "magic strings" for the Role
-            messages.Add(new Message
-            {
+            messages.Add(new Message() {
                 IsAssistant = false,
                 Content = userMessageText
-            });
+                });
                 
             userMessageText = null;
 
@@ -56,7 +55,7 @@ public partial class Chat
             messages.Add(assistantMessage);
             StateHasChanged();
 
-            IAsyncEnumerable<string> chunks = Backend.ChatAsync(request);
+            IAsyncEnumerable<string> chunks = ChatHandler.Stream(request);
 
             await foreach (var chunk in chunks)
             {
