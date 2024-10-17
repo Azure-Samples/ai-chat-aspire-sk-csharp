@@ -10,7 +10,7 @@ var chatDeploymentName = "chat";
 var openai = builder.ExecutionContext.IsPublishMode 
     ? builder.AddAzureOpenAI("openai")
          .AddDeployment(new AzureOpenAIDeployment(chatDeploymentName, "gpt-4o", "2024-05-13", "GlobalStandard", 10))
-    : builder.AddConnectionString("openai");
+    : builder.AddConnectionString("openai", "OPENAI_CONNECTION_STRING");
 
 builder.AddProject<AIChatApp_Backend>("aichatapp-backend")
     .WithReference(openai)

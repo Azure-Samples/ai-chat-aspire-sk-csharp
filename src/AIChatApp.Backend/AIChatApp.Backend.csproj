@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AIChatApp.DataEntities\AIChatApp.Shared.csproj" />
+    <ProjectReference Include="..\AIChatApp.ServiceDefaults\AIChatApp.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

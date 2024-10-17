@@ -6,6 +6,9 @@ using Microsoft.SemanticKernel;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add service defaults & Aspire components.
+builder.AddServiceDefaults();
+
 // Add the Azure OpenAI client configured in AppHost
 builder.AddAzureOpenAIClient("openai");
 
