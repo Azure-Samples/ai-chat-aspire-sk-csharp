@@ -11,11 +11,9 @@
         <div class="messages">
             <ChatMessage
                 State="@(new Message(){IsAssistant = true, Content = "Hi, I'm a helpful assistant, how may I assist you?"})" />
-            @for (var i = 0; i < messages.Count; i++)
+            @foreach (var message in messages)
             {
-                var id = $"message{i}";
-                var state = messages[i]!;
-                <ChatMessage @key="@id" State="@state" />
+                <ChatMessage @key="@message" State="@message" />
             }
         </div>
     </div>

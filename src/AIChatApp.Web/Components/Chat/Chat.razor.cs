@@ -37,10 +37,11 @@ public partial class Chat
         {
             // Add the user's message to the UI
             // TODO: Don't rely on "magic strings" for the Role
-            messages.Add(new Message() {
+            messages.Add(new Message
+            {
                 IsAssistant = false,
                 Content = userMessageText
-                });
+            });
                 
             userMessageText = null;
 
