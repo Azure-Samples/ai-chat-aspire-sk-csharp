@@ -12,6 +12,11 @@ param location string
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
+@description('Flag to decide where to create OpenAI role for current user')
+param createRoleForUser bool = true
+
+var userId = createRoleForUser ? principalId : ''
+
 var tags = {
   'azd-env-name': environmentName
 }
@@ -39,6 +44,7 @@ module openai 'openai/openai.module.bicep' = {
     location: location
     principalId: resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
     principalType: 'ServicePrincipal'
+    userId: userId
   }
 }
 output MANAGED_IDENTITY_CLIENT_ID string = resources.outputs.MANAGED_IDENTITY_CLIENT_ID
