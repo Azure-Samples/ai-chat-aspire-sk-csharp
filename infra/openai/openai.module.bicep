@@ -50,7 +50,7 @@ resource cognitiveServicesAccountDeployment_6E9woetGC 'Microsoft.CognitiveServic
   parent: cognitiveServicesAccount_wXAGTFUId
   name: 'chat'
   sku: {
-    name: 'GlobalStandard'
+    name: 'Standard'
     capacity: 10
   }
   properties: {

@@ -10,11 +10,11 @@ hooks:
   postprovision:
     windows:
       shell: pwsh
-      run: ./infra/post-script/set-connection-string.ps1 ./src/AIChatApp.AppHost/
+      run: ./infra/post-script/store-env-variables.ps1
       interactive: true
       continueOnError: true
     posix:
       shell: sh
-      run: ./infra/post-script/set-connection-string.sh ./src/AIChatApp.AppHost/
+      run: ./infra/post-script/store-env-variables.sh
       interactive: false
       continueOnError: true
