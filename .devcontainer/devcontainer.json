@@ -32,6 +32,8 @@
         }
     },
 
+	"postCreateCommand": "dotnet dev-certs https --trust" // Enable HTTPS support
+
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
 	// "portsAttributes": {
