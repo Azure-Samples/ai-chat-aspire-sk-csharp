@@ -6,3 +6,15 @@ services:
     language: dotnet
     project: ./src/AIChatApp.AppHost/AIChatApp.AppHost.csproj
     host: containerapp
+hooks:
+  postprovision:
+    windows:
+      shell: pwsh
+      run: ./infra/post-script/store-env-variables.ps1
+      interactive: true
+      continueOnError: true
+    posix:
+      shell: sh
+      run: ./infra/post-script/store-env-variables.sh
+      interactive: false
+      continueOnError: true
