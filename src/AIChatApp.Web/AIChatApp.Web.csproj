@@ -4,7 +4,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>AIChatApp</RootNamespace>
-    <UserSecretsId>b0ee5b46-677b-4906-bcc3-e74dafe7a50f</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.Azure.AI.OpenAI" Version="9.0.0-preview.4.24511.1" />
